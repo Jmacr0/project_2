@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  const comments = sequelize.define("comments", {
+  const Comments = sequelize.define("Comments", {
     body: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return comments;
+  return Comments;
 };
 
 // POSSIBLE COLUMNS TO ADD:
