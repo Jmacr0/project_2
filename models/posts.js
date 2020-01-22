@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  const posts = sequelize.define("posts", {
+  const Posts = sequelize.define("Posts", {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return posts;
+  return Posts;
 };
 
 // POSSIBLE COLUMNS TO ADD:

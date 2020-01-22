@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  const users = sequelize.define("users", {
+  const Users = sequelize.define("Users", {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
     }
   });
-  return users;
+  return Users;
 };
 
 // Any other columns needed here?
