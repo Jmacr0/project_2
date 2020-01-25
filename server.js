@@ -1,5 +1,9 @@
 const express = require("express");
 
+const passport = require("passport");
+const initialisePassport = require("./controllers/passport-config");
+initialisePassport(passport);
+
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -10,7 +14,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-var exphbs = require("express-handlebars");
+const exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
