@@ -16,7 +16,7 @@ router.get("/sign-up", function (req, res) {
     res.render("sign-up");
 })
 
-router.post("/api/users", function (req, res) {  
+router.post("/api/users", function (req, res) {
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
     console.log(hashedPassword);
     db.Users.create({
@@ -28,6 +28,18 @@ router.post("/api/users", function (req, res) {
     }).then(function (newUser) {
         res.json(newUser);
     })
+})
+
+router.post("/api/users/login", async function (req, res) {
+    const checkUserExist = await db.Users.findOne({
+        where: {
+            username: req.body.username
+        }
+    });
+    if (bcrypt.compareSync(req.body.password, checkUserExist.password)){
+        console.log(`${checkUserExist.username} is now logged in !`)
+    }
+   
 })
 
 module.exports = router;
