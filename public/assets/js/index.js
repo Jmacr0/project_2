@@ -16,19 +16,28 @@ $(function () {
         //need to add some logic
         event.preventDefault();
         console.log("clicked");
-        const firstNameInput = $("#sign-up-first-name");
-        const lastNameInput = $("#sign-up-last-name");
-        const usernameInput = $("#sign-up-username");
-        const passwordInput = $("#sign-up-password");
-        const countryInput = $("#sign-up-country");
+        const firstNameInput = $("#sign-up-first-name").val().trim();
+        const lastNameInput = $("#sign-up-last-name").val().trim();
+        const usernameInput = $("#sign-up-username").val().trim();
+        const passwordInput = $("#sign-up-password").val().trim();
+        const confirmPasswordInput = $("confirm-password").val().trim();
+        const countryInput = $("#sign-up-country").val().trim();
+
+        //check if passwords the same
+        if (passwordInput !== confirmPasswordInput) {
+            //return error
+            return;
+        } 
+
         const newUser = {
-            username: usernameInput.val().trim(),
-            password: passwordInput.val().trim(),
-            firstName: firstNameInput.val().trim(),
-            lastName: lastNameInput.val().trim(),            
-            country: countryInput.val()
+            username: usernameInput,
+            password: passwordInput,
+            firstName: firstNameInput,
+            lastName: lastNameInput,
+            country: countryInput
         };
         console.log(newUser);
+
         // Send the PUT request.
         $.ajax("/api/users", {
             type: "POST",
@@ -40,5 +49,7 @@ $(function () {
                 // location.reload();
             }
         );
+
+
     });
 });

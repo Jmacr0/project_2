@@ -1,5 +1,5 @@
 const express = require("express");
-
+const passwordHash = require('password-hash'); 
 const router = express.Router();
 
 const db = require("../models");
@@ -17,10 +17,11 @@ router.get("/sign-up", function (req, res) {
 })
 
 router.post("/api/users", function (req, res) {
-    console.log(req.body)
+    const hashedPassword = passwordHash.generate(req.body.password);
+    console.log(hashedPassword);
     db.Users.create({
         username: req.body.username,
-        password: req.body.password,
+        password: hashedPassword,
         firstName: req.body.firstName,
         lastName: req.body.lastName,        
         country: req.body.country
