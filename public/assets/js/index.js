@@ -20,7 +20,7 @@ $(function () {
         const lastNameInput = $("#sign-up-last-name").val().trim();
         const usernameInput = $("#sign-up-username").val().trim();
         const passwordInput = $("#sign-up-password").val().trim();
-        const confirmPasswordInput = $("confirm-password").val().trim();
+        const confirmPasswordInput = $("#confirm-password").val().trim();
         const countryInput = $("#sign-up-country").val().trim();
 
         //check if passwords the same
@@ -44,7 +44,7 @@ $(function () {
             data: newUser
         }).then(
             function (data) {
-                console.log("created new user: " + data);
+                console.log("created new user: " + data);                
                 // Reload the page to get the updated list
                 // location.reload();
             }
