@@ -7,6 +7,31 @@ $(function () {
         //need to add some logic
     });
 
+    $("#login-button-proceed").on("click", function () {        
+        //need to add some logic
+        event.preventDefault();
+        console.log("clicked");
+        const usernameInput = $("#login-username").val().trim();
+        const passwordInput = $("#login-password").val().trim();
+        
+        const checkUserExist = {
+            username: usernameInput,
+            password: passwordInput,
+        };
+        // Send the PUT request.
+        $.ajax("/api/users/login", {
+            type: "POST",
+            data: checkUserExist
+        }).then(
+            function (data) {
+                console.log("user has logged in: " + data);                
+                // Reload the page to get the updated list
+                // location.reload();
+            }
+        );   
+
+    });
+
     $("#sign-up-button").on("click", function () {
         //need to add some logic
         console.log("clicked");
@@ -16,29 +41,40 @@ $(function () {
         //need to add some logic
         event.preventDefault();
         console.log("clicked");
-        const firstNameInput = $("#sign-up-first-name");
-        const lastNameInput = $("#sign-up-last-name");
-        const usernameInput = $("#sign-up-username");
-        const passwordInput = $("#sign-up-password");
-        const countryInput = $("#sign-up-country");
+        const firstNameInput = $("#sign-up-first-name").val().trim();
+        const lastNameInput = $("#sign-up-last-name").val().trim();
+        const usernameInput = $("#sign-up-username").val().trim();
+        const passwordInput = $("#sign-up-password").val().trim();
+        const confirmPasswordInput = $("#confirm-password").val().trim();
+        const countryInput = $("#sign-up-country").val().trim();
+
+        //check if passwords the same
+        if (passwordInput !== confirmPasswordInput) {
+            //return error
+            return;
+        } 
+
         const newUser = {
-            username: usernameInput.val().trim(),
-            password: passwordInput.val().trim(),
-            firstName: firstNameInput.val().trim(),
-            lastName: lastNameInput.val().trim(),            
-            country: countryInput.val()
+            username: usernameInput,
+            password: passwordInput,
+            firstName: firstNameInput,
+            lastName: lastNameInput,
+            country: countryInput
         };
         console.log(newUser);
+
         // Send the PUT request.
         $.ajax("/api/users", {
             type: "POST",
             data: newUser
         }).then(
             function (data) {
-                console.log("created new user: " + data);
+                console.log("created new user: " + data);                
                 // Reload the page to get the updated list
                 // location.reload();
             }
         );
+
+
     });
 });
