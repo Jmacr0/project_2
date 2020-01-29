@@ -18,6 +18,20 @@ router.get("/sign-up", function (req, res) {
 router.get("/post", function (req, res) {
     res.render("post");
 });
+router.get("/profile", function (req, res) {
+    db.Users.findOne({
+        where: {
+            id: req.params.id
+        },
+        include:{
+            model: db.Posts,
+            include: [db.Comments, db.Likes]
+          }
+    }).then(function (dbAuthor) {
+        res.render("profile", dbAuthor);
+    });
+    
+});
 
 router.post("/api/users", function (req, res) {
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
@@ -39,10 +53,10 @@ router.post("/api/users/login", async function (req, res) {
             username: req.body.username
         }
     });
-    if (bcrypt.compareSync(req.body.password, checkUserExist.password)){
+    if (bcrypt.compareSync(req.body.password, checkUserExist.password)) {
         console.log(`${checkUserExist.username} is now logged in !`)
     }
-   
+
 })
 
 module.exports = router;
