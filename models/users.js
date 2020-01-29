@@ -37,8 +37,13 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "cascade"
     });
     Users.hasMany(models.Likes, {
+      foreignKey: {
+        name: 'userId',
+        allowNull: false
+      },
       onDelete: "cascade"
     });
+  
   };
   return Users;
 };
