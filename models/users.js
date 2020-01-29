@@ -28,6 +28,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
     }
   });
+
+  Users.associate = function(models) {
+    Users.hasMany(models.Posts, {
+      onDelete: "cascade"
+    });
+  };
   return Users;
 };
 
