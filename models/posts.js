@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const Posts = sequelize.define("Posts", {
     title: {
       type: DataTypes.STRING,
@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  Posts.associate = function(models) {
+  Posts.associate = function (models) {
     // We're saying that a Post should belong to an Author
     // A Post can't be created without an Author due to the foreign key constraint
     Posts.belongsTo(models.Users, {
@@ -24,6 +24,18 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false
       }
     });
+
+    Posts.hasMany(models.Comments, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+
+    Posts.hasMany(models.Likes, {
+      foreignKey: {
+        allowNull: false
+      }
+    });    
   };
   return Posts;
 };
