@@ -21,6 +21,7 @@ module.exports = function (sequelize, DataTypes) {
     // A Post can't be created without an Author due to the foreign key constraint
     Posts.belongsTo(models.Users, {
       foreignKey: {
+        name: 'postId',
         allowNull: false
       }
     });
@@ -33,6 +34,7 @@ module.exports = function (sequelize, DataTypes) {
 
     Posts.hasMany(models.Likes, {
       foreignKey: {
+        name: 'postId',
         allowNull: false
       }
     });    
