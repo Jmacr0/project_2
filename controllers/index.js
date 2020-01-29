@@ -10,11 +10,14 @@ router.get("/", function (req, res) {
 
 router.get("/login", function (req, res) {
     res.render("login");
-})
+});
 
 router.get("/sign-up", function (req, res) {
     res.render("sign-up");
-})
+});
+router.get("/post", function (req, res) {
+    res.render("post");
+});
 
 router.post("/api/users", function (req, res) {
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
