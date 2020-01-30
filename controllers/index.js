@@ -19,6 +19,11 @@ router.get("/sign-up", function (req, res) {
 router.get("/post", function (req, res) {
     res.render("post");
 });
+
+// Left this code here commented out. 
+// I just needed to make a basic route to /profile to get
+// the login to work. Feel free to edit that route to get the user info you need
+
 // router.get("/profile", function (req, res) {
 //     db.Users.findOne({
 //         where: {
@@ -32,7 +37,6 @@ router.get("/post", function (req, res) {
 //         console.log(dbAuthor);
 //         res.render("profile", dbAuthor);
 //     });
-    
 // });
 
 router.get("/profile", (req, res) => {
@@ -122,18 +126,6 @@ router.post("/users/signup", (req, res) => {
     }
 
 });
-
-// router.post("/api/users/login", async function (req, res) {
-//     const checkUserExist = await db.Users.findOne({
-//         where: {
-//             username: req.body.username
-//         }
-//     });
-//     if (bcrypt.compareSync(req.body.password, checkUserExist.password)){
-//         console.log(`${checkUserExist.username} is now logged in !`)
-//     }
-
-// })
 
 // Login route
 router.post("/users/login", (req, res, next) => {
