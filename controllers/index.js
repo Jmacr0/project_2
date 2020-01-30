@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs")
+const passport = require("passport");
 
 const db = require("../models");
 
@@ -18,22 +19,27 @@ router.get("/sign-up", function (req, res) {
 router.get("/post", function (req, res) {
     res.render("post");
 });
-router.get("/profile", function (req, res) {
-    db.Users.findOne({
-        where: {
-            id: req.params.id
-        },
-        include:  {
-            model: db.Posts,
-            include: [db.Comments, db.Likes]
-        }
-    }).then(function(dbAuthor) {
-        console.log(dbAuthor);
-        res.render("profile", dbAuthor);
-    });
+// router.get("/profile", function (req, res) {
+//     db.Users.findOne({
+//         where: {
+//             id: req.params.id
+//         },
+//         include:  {
+//             model: db.Posts,
+//             include: [db.Comments, db.Likes]
+//         }
+//     }).then(function(dbAuthor) {
+//         console.log(dbAuthor);
+//         res.render("profile", dbAuthor);
+//     });
     
+// });
+
+router.get("/profile", (req, res) => {
+    res.render("profile");
 });
 
+// Sign Up route
 router.post("/users/signup", (req, res) => {
     
     const {
@@ -107,6 +113,7 @@ router.post("/users/signup", (req, res) => {
                         lastName: signUpLastName,
                         country: signUpCountry
                     }).then(function () {
+                        req.flash("success_msg", "You are now registered, please log in")
                         res.redirect("/login");
                     })
                 }
@@ -116,16 +123,25 @@ router.post("/users/signup", (req, res) => {
 
 });
 
-router.post("/api/users/login", async function (req, res) {
-    const checkUserExist = await db.Users.findOne({
-        where: {
-            username: req.body.username
-        }
-    });
-    if (bcrypt.compareSync(req.body.password, checkUserExist.password)){
-        console.log(`${checkUserExist.username} is now logged in !`)
-    }
+// router.post("/api/users/login", async function (req, res) {
+//     const checkUserExist = await db.Users.findOne({
+//         where: {
+//             username: req.body.username
+//         }
+//     });
+//     if (bcrypt.compareSync(req.body.password, checkUserExist.password)){
+//         console.log(`${checkUserExist.username} is now logged in !`)
+//     }
 
-})
+// })
+
+// Login route
+router.post("/users/login", (req, res, next) => {
+    passport.authenticate("local", {
+        successRedirect: "/profile",
+        failureRedirect: "/login",
+        failureFlash: true
+    })(req, res, next);
+});
 
 module.exports = router;
