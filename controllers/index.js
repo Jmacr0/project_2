@@ -34,21 +34,6 @@ router.get("/profile", function (req, res) {
     
 });
 
-
-// router.post("/api/users", function (req, res) {
-//     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-//     console.log(hashedPassword);
-//     db.Users.create({
-//         username: req.body.username,
-//         password: hashedPassword,
-//         firstName: req.body.firstName,
-//         lastName: req.body.lastName,
-//         country: req.body.country
-//     }).then(function (newUser) {
-//         res.json(newUser);
-//     })
-// })
-
 router.post("/users/signup", (req, res) => {
     
     const {
@@ -92,9 +77,11 @@ router.post("/users/signup", (req, res) => {
         }).then((user) => {
             if(user) {
                 errors.push({msg: "There is already an account with this email address"});
+                console.log("email already in use");
                 res.render("sign-up", {
                     errors
                 })
+                return;
             }
 
             // check if username already exists in the database
@@ -105,6 +92,7 @@ router.post("/users/signup", (req, res) => {
             }).then((user) => {
                 if(user) {
                     errors.push({msg: "This username is already taken, please try another"});
+                    console.log("username already in use");
                     res.render("sign-up", {
                         errors
                     })
@@ -125,8 +113,6 @@ router.post("/users/signup", (req, res) => {
             })
         })
     }
-
-    // console.log(errors);
 
 });
 
