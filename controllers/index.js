@@ -6,7 +6,16 @@ const passport = require("passport");
 const db = require("../models");
 
 router.get("/", function (req, res) {
-    res.render("index");
+    const loggedIn = req.user;
+    console.log(loggedIn)
+    db.Posts.findAll({
+        order: [
+            ['id', 'DESC']
+        ]
+    }).then((Posts) => {
+        console.log(Posts);
+        res.render("index", { Posts, loggedIn });
+    });
 });
 
 router.get("/login", function (req, res) {
@@ -16,8 +25,10 @@ router.get("/login", function (req, res) {
 router.get("/sign-up", function (req, res) {
     res.render("sign-up");
 });
+
 router.get("/post", function (req, res) {
-    res.render("post");
+    const loggedIn = req.body;
+    res.render("post", {loggedIn});
 });
 
 // Left this code here commented out. 
@@ -41,6 +52,7 @@ router.get("/post", function (req, res) {
 
 router.get("/profile", (req, res) => {
     console.log(req.user, "IM HERE");
+    const loggedIn = req.user;
     const user = {
         username: req.user.username,
         firstName: req.user.firstName,
@@ -51,15 +63,15 @@ router.get("/profile", (req, res) => {
             UserId: req.user.id
         },
     }).then((Posts) => {
-        console.log({Posts, user});
-        res.render("profile", {Posts, user});
+        console.log({ Posts, user });
+        res.render("profile", { Posts, user, loggedIn });
     })
-    
+
 });
 
 // Sign Up route
 router.post("/users/signup", (req, res) => {
-    
+
     const {
         signUpEmail,
         signUpFirstName,
@@ -73,22 +85,22 @@ router.post("/users/signup", (req, res) => {
     let errors = [];
 
     // check required fields have an entry
-    if(!signUpEmail || !signUpFirstName || !signUpLastName || !signUpUsername || !signUpPassword || !confirmPassword || !signUpCountry) {
-        errors.push({msg: "Please fill in all fields"});
+    if (!signUpEmail || !signUpFirstName || !signUpLastName || !signUpUsername || !signUpPassword || !confirmPassword || !signUpCountry) {
+        errors.push({ msg: "Please fill in all fields" });
     }
 
     // check passwords match
-    if(signUpPassword !== confirmPassword) {
-        errors.push({msg: "Passwords do not match"});
+    if (signUpPassword !== confirmPassword) {
+        errors.push({ msg: "Passwords do not match" });
     }
 
     // check password length
-    if(signUpPassword.length < 8) {
-        errors.push({msg: "Password must be at least 8 characters"})
+    if (signUpPassword.length < 8) {
+        errors.push({ msg: "Password must be at least 8 characters" })
     }
 
     // if there is an error, re-render the page with the errors displayed
-    if(errors.length > 0) {
+    if (errors.length > 0) {
         res.render("sign-up", {
             errors
         })
@@ -99,8 +111,8 @@ router.post("/users/signup", (req, res) => {
                 email: signUpEmail
             }
         }).then((user) => {
-            if(user) {
-                errors.push({msg: "There is already an account with this email address"});
+            if (user) {
+                errors.push({ msg: "There is already an account with this email address" });
                 console.log("email already in use");
                 res.render("sign-up", {
                     errors
@@ -114,8 +126,8 @@ router.post("/users/signup", (req, res) => {
                     username: signUpUsername
                 }
             }).then((user) => {
-                if(user) {
-                    errors.push({msg: "This username is already taken, please try another"});
+                if (user) {
+                    errors.push({ msg: "This username is already taken, please try another" });
                     console.log("username already in use");
                     res.render("sign-up", {
                         errors
@@ -158,7 +170,7 @@ router.post("/users/new/post", (req, res) => {
     db.Posts.create({
         title: req.body.title,
         body: req.body.body,
-        UserId: req.user.id 
+        UserId: req.user.id
     }).then(() => {
         res.redirect("/profile");
     });
