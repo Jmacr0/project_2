@@ -136,4 +136,19 @@ router.post("/users/login", (req, res, next) => {
     })(req, res, next);
 });
 
+// new post route
+router.post("/users/new/post", (req, res) => {
+    console.log(req.body);
+    console.log(req.user.id);
+
+    db.Posts.create({
+        title: req.body.title,
+        body: req.body.body,
+        UserId: req.user.id 
+    }).then(() => {
+        res.redirect("/profile");
+    });
+
+})
+
 module.exports = router;

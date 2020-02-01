@@ -2,14 +2,14 @@
         <a class="navbar-brand" href="/">Post</a>
     </nav>
     <div class="container">
-        <form id= "post">
+        <form action="/users/new/post" method="post" id= "post">
         <div class="form-group">
             <label for="exampleFormControlInput1">Title</label>
-            <input type="text" class="form-control" id="title">
+            <input type="text" class="form-control" id="title" name="title">
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Content</label>
-            <textarea class="form-control" id="body" rows="9"></textarea>
+            <textarea class="form-control" id="body" name="body" rows="9"></textarea>
         </div>
         <button type="submit" class="btn btn-primary mb-2 save">Save</button>
     </form>
