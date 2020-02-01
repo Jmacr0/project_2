@@ -40,7 +40,13 @@ router.get("/post", function (req, res) {
 // });
 
 router.get("/profile", (req, res) => {
-    res.render("profile");
+    console.log(req.user);
+    const user = {
+        username: req.user.username,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
+    }
+    res.render("profile", user);
 });
 
 // Sign Up route
