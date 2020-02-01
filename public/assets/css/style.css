@@ -18,6 +18,8 @@ html {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    /* Fixed so that background remains in the same position when scrolling */
+    background-attachment: fixed
 }
 
 .logo {
@@ -52,9 +54,6 @@ html {
     line-height: 0.5;
 }
 
-#logout-button {
-    display: none;
-}
 .userName {
     font-family: 'Parisienne', cursive;
     font-size: 100px;
@@ -67,4 +66,36 @@ html {
 
 .bio-card, .blog-card{
     border: none;
+}
+
+.transparent-black {
+    background-color: rgba(0, 0, 0, 0.281);
+}
+
+.transparent {
+    background-color: rgba(255, 235, 205, 0);
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    text-decoration: none;
+    color: rgb(187, 187, 187);
+    transition-duration: 0.2s;
+}
+
+@keyframes colour-change {
+    from {color: rgb(0, 139, 35);}
+    to {color: rgb(145, 255, 0);}
+}
+
+.fresh {
+    font-family: 'Indie Flower', cursive;
+    animation-name: colour-change;
+    animation-duration: 3s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
 }
