@@ -1,4 +1,69 @@
-button a, button a:hover {
-    text-decoration: none;
-    color: #ffffff;
-}
+@import url("https://fonts.googleapis.com/css?family=Parisienne&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
+        .userName {
+            font-family: 'Parisienne', cursive;
+            font-size: 100px;
+        }
+
+        .profile {
+            border-radius: 50%;
+            height: 250px;
+        }
+
+        .bio-card, .blog-card{
+            border: none;
+        }
+        
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg {
+            /* The image used */
+            background-image: url("blog2.jpg");
+
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .logo {
+            font-family: 'Parisienne', cursive;
+            font-size: 40px;
+        }
+
+        .navbar {
+            padding: 0 10 0;
+            height: 70px;
+        }
+
+        .login-form, .signup-form {
+            margin-top: -10px;
+        }
+
+        .btn {
+            font-family: 'Indie Flower', cursive;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logging, .signing {
+            margin-top: 20px;
+            border-radius: 20px;
+            font-family: 'Indie Flower', cursive;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .signing {
+            line-height: 0.5;
+        }
+
+        #logout-button {
+            display: none;
+        }
