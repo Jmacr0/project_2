@@ -30,7 +30,7 @@ html {
     height: 70px;
 }
 
-.login-form, .signup-form, .landing-page {
+.login-form, .signup-form, .landing-page, .profile {
     margin-top: -10px;
 }
 
@@ -54,4 +54,17 @@ html {
 
 #logout-button {
     display: none;
+}
+.userName {
+    font-family: 'Parisienne', cursive;
+    font-size: 100px;
+}
+
+.profile {
+    border-radius: 50%;
+    height: 250px;
+}
+
+.bio-card, .blog-card{
+    border: none;
 }

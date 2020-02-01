@@ -40,13 +40,21 @@ router.get("/post", function (req, res) {
 // });
 
 router.get("/profile", (req, res) => {
-    console.log(req.user);
+    console.log(req.user, "IM HERE");
     const user = {
         username: req.user.username,
         firstName: req.user.firstName,
         lastName: req.user.lastName,
     }
-    res.render("profile", user);
+    db.Posts.findAll({
+        where: {
+            UserId: req.user.id
+        },
+    }).then((Posts) => {
+        console.log({Posts, user});
+        res.render("profile", {Posts, user});
+    })
+    
 });
 
 // Sign Up route
