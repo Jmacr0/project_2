@@ -8,7 +8,7 @@ const env = process.env.NODE_ENV || 'development';
 
 let config;
 if (env === 'development') {
-  config = require(__dirname + '/../config/config.local.json')[env];
+  config = require(__dirname + '/../config/config.local.json')[env]; 
 }
 
 const db = {};
