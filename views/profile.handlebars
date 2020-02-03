@@ -3,7 +3,7 @@
     <h1 class="display-4 text-center userName text-light font-weight-bold">{{user.userName}}</h1>
   </div>
 </div>
-<div class="container">
+<div class="container profile-page">
   <div class="row">
     <div class="col-9">
       {{#each Posts}}
@@ -38,10 +38,10 @@
           <div class="card-body">
             <h5>{{user.firstName}} {{user.lastName}}</h5>
             <hr>
-            <h5 class="card-title">Bio</h5>
-            <p class="card-text">ID: {{user.ID}}</p>
-            <p class="card-text">Email: {{user.Email}}</p>
-            <p class="card-text">Country: {{user.Country}}</p>
+            <h5 class="card-title"><strong>Bio </strong> </h5>
+            <p class="card-text"><strong>ID:</strong> {{user.ID}}</p>
+            <p class="card-text"><strong>Email: </strong> {{user.Email}}</p>
+            <p class="card-text"><strong>Country: </strong> {{user.Country}}</p>
             <hr>
             <button class="btn btn-primary"><a href="/post">New Post</a></button>
           </div>

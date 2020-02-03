@@ -99,3 +99,7 @@ a:hover {
     animation-direction: alternate;
     animation-iteration-count: infinite;
 }
+
+.dashboard, .profile-page {
+    font-family: 'Indie Flower', cursive;
+}
