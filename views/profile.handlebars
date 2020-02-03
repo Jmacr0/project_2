@@ -1,50 +1,51 @@
-<div class="jumbotron jumbotron-fluid profile">
-        <div class="container">
-            <h1 class="display-4 text-center userName">{{user.firstName}} {{user.lastName}}</h1>
-        </div>
-    </div>
-    <div class="container">
+<div class="jumbotron jumbotron-fluid transparent-black">
+  <div class="container">
+    <h1 class="display-4 text-center userName text-light font-weight-bold">{{user.username}}</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      {{#each Posts}}
+      <div class="container-fluid transparent-black shadow-sm">
+        <div class="row m-2">
+          <div class="col">
+            <div class="row p-3 bg-success">
+              <h2><a href="" data-toggle="modal" data-target="#staticBackdrop">{{dataValues.title}}</a></h2>
+            </div>
             <div class="row">
-              <div class="col-9">
-                  <ul class="list-group list-group-flush"> 
-                      {{#each Posts}}
-                      <li class="list-group-item">
-                      <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                              <h5 class="card-title">{{dataValues.title}}</h5>
-                              <p class="card-text">{{dataValues.body}}</p>
-                              <a href="#" class="card-link">Update</a>
-                              <a href="#" class="card-link">Delete</a>
-                            </div>
-                          </div> 
-                  </li>
-                    {{/each}}
-                  </ul>
-                      
-              </div>
-              <div class="col-3">
-                  <div class="row">
-                        <div class="card bio-card" style="width: 18rem;">
-                                <img class="card-img-top profile" src="https://static.addtoany.com/images/dracaena-cinnabari.jpg" alt="Card image cap">
-                                <div class="card-body">
-                                  <h5 class="card-title">Bio</h5>
-                                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                  <a href="#" class="card-link">Card link</a>
-                                  <a href="#" class="card-link">Another link</a>
-                                </div>
-                            </div>
-                  </div>
-                <div class="row">
-                        <div class="card blog-card" style="width: 18rem;">
-                                <h5> My Blogs </h5>
-                                <a href="/post" class="card-link">New Post</a>
-                                <ul class="list-group list-group-flush">
-                                  <li class="list-group-item">Cras justo odio</li>
-                                  <li class="list-group-item">Dapibus ac facilisis in</li>
-                                  <li class="list-group-item">Vestibulum at eros</li>
-                                </ul>
-                              </div>
-                </div>
+              <div class="col">
+                <p class="text-light transparent-black p-4">{{dataValues.body}}</p>
               </div>
             </div>
+            <div class="row">
+              <div class="col">
+                <p class="text-light">{{dataValues.createdAt}}</p>
+              </div>
+            </div>
+          </div>          
+        </div>
+      </div>
+      {{/each}}
+
+
+    </div>
+    <div class="col-3">
+      <div class="row">
+        <div class="card bio-card" style="width: 18rem;">
+          <img class="card-img-top profile" src="https://static.addtoany.com/images/dracaena-cinnabari.jpg"
+            alt="Card image cap">
+          <div class="card-body">
+            <h5>{{user.firstName}} {{user.lastName}}</h5>
+            <hr>
+            <h5 class="card-title">Bio</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+              content.</p>
+            <hr>
+            <button class="btn btn-primary"><a href="/post">New Post</a></button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
