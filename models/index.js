@@ -15,7 +15,9 @@ const db = {};
 
 let sequelize;
 if (!config) {
-  sequelize = new Sequelize(process.env['JAWSDB_URL'], config);
+  sequelize = new Sequelize(process.env['JAWSDB_URL'], {
+    dialect: 'mysql'
+  });
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
