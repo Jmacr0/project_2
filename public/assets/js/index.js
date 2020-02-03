@@ -12,4 +12,13 @@ $(function () {
         console.log("clicked");
     });
 
+    $("i").on("click", function () {
+        event.preventDefault();
+        if($(this).hasClass("far")){
+            $(this).removeClass( "far" ).addClass( "fas" );
+            
+        } else {
+            $(this).removeClass( "fas" ).addClass( "far" );  
+        }
+    })
 });

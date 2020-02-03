@@ -11,7 +11,12 @@ router.get("/", function (req, res) {
     db.Posts.findAll({
         order: [
             ['id', 'DESC']
-        ]
+        ],
+        include: [
+            db.Comments, 
+            db.Likes,
+            db.Users
+        ]        
     }).then((Posts) => {
         console.log(Posts);
         res.render("index", { Posts, loggedIn });
@@ -28,7 +33,7 @@ router.get("/sign-up", function (req, res) {
 
 router.get("/post", function (req, res) {
     const loggedIn = req.body;
-    res.render("post", {loggedIn});
+    res.render("post", { loggedIn });
 });
 
 // Left this code here commented out. 
