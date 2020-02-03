@@ -13,15 +13,31 @@ router.get("/", function (req, res) {
             ['id', 'DESC']
         ],
         include: [
-            db.Comments, 
+            db.Comments,
             db.Likes,
             db.Users
-        ]        
+        ]
     }).then((Posts) => {
         console.log(Posts);
         res.render("index", { Posts, loggedIn });
     });
 });
+
+router.post("/", function (req, res) {
+    if (!req.user) {
+        // want to show an error saying "please log in to comment"
+        return
+    }
+
+    if (req.body.liked) {
+        db.Likes.create({
+            userId: req.user.id,
+            postId: req.body.postId
+        }).then(() => {
+            console.log("liked and created !")
+        });
+    }
+})
 
 router.get("/login", function (req, res) {
     res.render("login");

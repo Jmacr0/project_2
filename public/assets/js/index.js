@@ -16,7 +16,8 @@ $(function () {
         event.preventDefault();
         if($(this).hasClass("far")){
             $(this).removeClass( "far" ).addClass( "fas" );
-            
+            const postId = $(this).siblings("span").text();
+            $.post( "/", { liked: true, postId: postId } );
         } else {
             $(this).removeClass( "fas" ).addClass( "far" );  
         }
