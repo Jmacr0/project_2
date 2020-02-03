@@ -7,7 +7,6 @@ const db = require("../models");
 
 router.get("/", function (req, res) {
     const loggedIn = req.user;
-    console.log(loggedIn)
     db.Posts.findAll({
         order: [
             ['id', 'DESC']
@@ -19,7 +18,7 @@ router.get("/", function (req, res) {
         ]
     }).then((Posts) => {
         console.log(Posts);
-        res.render("index", { Posts, loggedIn });
+        res.render("index", {Posts, loggedIn});
     });
 });
 
@@ -75,9 +74,12 @@ router.get("/profile", (req, res) => {
     console.log(req.user, "IM HERE");
     const loggedIn = req.user;
     const user = {
-        username: req.user.username,
+        userName: req.user.username,
         firstName: req.user.firstName,
         lastName: req.user.lastName,
+        ID: req.user.id,
+        Email: req.user.email,
+        Country: req.user.country
     }
     db.Posts.findAll({
         where: {
@@ -85,7 +87,7 @@ router.get("/profile", (req, res) => {
         },
     }).then((Posts) => {
         console.log({ Posts, user });
-        res.render("profile", { Posts, user, loggedIn });
+        res.render("profile", { Posts, user, loggedIn});
     })
 
 });
